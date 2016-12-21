@@ -1,0 +1,14 @@
+"Managed by Puppet do not edit
+filetype plugin indent on
+syntax on
+set showmode
+set nocompatible
+set bs=2
+set ts=4
+set background=light
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+set ai
+nmap <C-N> :set invnumber<CR>
+nmap <CR> G

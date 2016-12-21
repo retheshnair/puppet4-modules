@@ -1,0 +1,45 @@
+sudo puppet config print
+sudo puppet config print environment
+sudo puppet config print environmentpath
+cd $(sudo puppet config print environmentpath)
+[vagrant@centos7 production]$ ls -al
+total 24
+drwxr-xr-x. 5 root root 4096 Dec 18 05:47 .
+drwxr-xr-x. 3 root root 4096 Dec  6 00:18 ..
+-rw-r--r--. 1 root root  879 Dec  6 00:17 environment.conf
+drwxr-xr-x. 2 root root 4096 Dec  6 00:18 hieradata
+drwxr-xr-x. 2 root root 4096 Dec  6 00:18 manifests
+drwxr-xr-x. 4 root root 4096 Dec 20 17:23 modules
+[vagrant@centos7 production]$ 
+
+sudo puppet module list
+sudo puppet module install puppetlabs/ntp
+sudo puppet module  list
+sudo puppet module  uninstall puppetlabs/ntp
+sudo puppet module install puppetlabs/ntp -i /etc/puppetlabs/code/modules
+[vagrant@centos7 puppet4-modules]$ sudo mkdir -p /etc/puppetlabs/code/environments/dev/{modules,manifests}
+[vagrant@centos7 puppet4-modules]$ sudo puppet module install puppetlabs/ntp \
+> --environment dev
+sudo puppet module uninstall puppetlabs/stdlib
+sudo puppet module install puppetlabs/stdlib -i /etc/puppetlabs/code/modules
+sudo puppet module list --environment dev
+sudo puppet config set environment dev
+sudo cat /etc/puppetlabs/puppet/puppet.conf [ environment is set in this file ] 
+cd /etc/puppetlabs/code/environments/production/modules/
+sudo mkdir -p motd/{manifests,files,examples}
+sudo vim motd/mainfests/init.pp
+sudo vim motd/files/message
+sudo puppet apply -e 'include motd'
+cd /etc/puppetlabs/code/environments/production/modules/
+sudo puppet module generate rethesh/test
+NTP Manifest
+
+cd /etc/puppetlabs/code/environments/production/modules/
+sudo mkdir -p ntp/{manifests,files,examples}
+sudo cp ~/puppet/ntpfinal.pp ntp/manifests/init.pp
+sudo vim ntp/manifests/init.pp [:2,$s/^/\t/] . also added the details under the class
+tree ntp/
+sudo vim ntp/manifests/init.pp [:3,6w ntp/files/ntp.conf]
+cat ntp/files/ntp.conf
+sudo rm /etc/ntp.conf
+sudo puppet apply -e 'inculde ntp'

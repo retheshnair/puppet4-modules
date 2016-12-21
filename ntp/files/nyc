@@ -1,0 +1,4 @@
+#Managed by puppet - do not edit manually
+server nyc.pool.ntp.org ibusrt perfer
+server nyc1.pool.ntp.org
+driftfile /var/lib/ntp/drift
